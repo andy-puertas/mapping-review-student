@@ -16,6 +16,7 @@ class App extends Component {
       descInput: '',
 
     }
+    this.editEvent = this.editEvent.bind( this )
 
     this.id = 4
   }
@@ -26,9 +27,13 @@ class App extends Component {
     this.id++
   }
 
+  editEvent() {
+    this.setState({})
+  }
+
   render() {
     let mapped = this.state.events.map((x, i) => {
-      return <EventCard key={i + x.name} event={x}/>
+      return <EventCard key={i + x.name} event={x} editEvent={this.editEvent}/>
     })
     return (
       <div className="App">

@@ -18,17 +18,23 @@ export default class EventCard extends Component {
             editDesc: this.props.event.desc})
     }
 
+    saveClick() {
+        this.setState({editToggle: !this.state.editToggle })
+        this.props.editEvent()
+    }
+   
+
     render() {
-        console.log(this.props)
+        console.log(this.state)
         return (
             <div className='eventCard'>
                 {
                     this.state.editToggle
                         ?
                             <div>
-                                <input value={this.state.editName}/>
-                                <input value={this.state.editTitle} />
-                                <textarea />
+                                <input value={this.state.editName} onChange={e => this.setState({editName: e.target.value})}/>
+                                <input value={this.state.editTitle} onChange={e => this.setState({editTitle: e.target.value})}/>
+                                <textarea value={this.state.editDesc} onChange={e => this.setState({editDesc: e.target.value})}/>
                             </div>
                             
                         :
@@ -39,7 +45,9 @@ export default class EventCard extends Component {
                         </div>
                 }
             
-                <button onClick={() => this.setState({editToggle: !this.state.editToggle })}>{this.state.editToggle ? 'Save' : 'Edit'}</button>
+                <button onClick={() => this.saveClick()}>
+                    {this.state.editToggle ? 'Save' : 'Edit'}
+                </button>
                 <button>Delete</button>
         </div>
         )
