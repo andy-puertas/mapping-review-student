@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import EventCard from './Components/EventCard'
 
 class App extends Component {
   constructor() {
     super()
 
     this.state = {
-      events: [{ id: 1, name: 'John', event: 'Rock Skipping', desc: "We're going to skip some rocks on water and it's going to be oh so fun."},
-                   { id: 2, name: 'Alexis', event: 'Chip Dipping', desc: "We're going to dip so many chips in so many dips. I may even bring cheese. The good kind."},
-                   { id: 3, name: 'Riley', event: 'Speed Walking', desc: "We will be walking at insane speeds, but never having both feet off the ground at the same time."}],
+      events: [{ id: 1, name: 'John', title: 'Rock Skipping', desc: "We're going to skip some rocks on water and it's going to be oh so fun."},
+                   { id: 2, name: 'Alexis', title: 'Chip Dipping', desc: "We're going to dip so many chips in so many dips. I may even bring cheese. The good kind."},
+                   { id: 3, name: 'Riley', title: 'Speed Walking', desc: "We will be walking at insane speeds, but never having both feet off the ground at the same time."}],
       nameInput: '',
       titleInput: '',
       descInput: '',
+
     }
 
     this.id = 4
@@ -25,6 +27,9 @@ class App extends Component {
   }
 
   render() {
+    let mapped = this.state.events.map((x, i) => {
+      return <EventCard key={i + x.name} event={x}/>
+    })
     return (
       <div className="App">
         <header className="App-header">
@@ -43,7 +48,7 @@ class App extends Component {
         <hr />
         <h2>Events :D</h2>
         <div className='eventsDisplay'>
-          {/* Let's display our mapped components here */}
+          {mapped}
         </div>
       </div>
     );
